@@ -1,0 +1,20 @@
+drop table if exists productos;
+
+create table productos
+(
+	nombreProducto char(50) not null,
+    descripcion blob(500),
+	precio integer(60), 
+	primary key (nombreProducto)
+);
+
+INSERT INTO `productos`(`nombreProducto`,`descripcion` , `precio`) VALUES ('FREE WEIGHTS - KETTLEBELLS','Las kettlebells para uso intensivo de Technogym tienen un diseño elegante y son seguras. Son adecuadas para todos los usuarios con independencia de su condición física. ',65);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('DUMBBELL DE URETANO','Las mancuernas revestidas de uretano de Technogym están diseñadas para ofrecer una sensación de entrenamiento natural y más efectivo. Son muy resistentes a las caídas y seguras de usar gracias a la gran calidad de los procesos de fabricación y a los materiales empleados. ',95);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('WELLNESS BALL™ TRAINING','Con la Wellness Ball™ te divertirás entrenando todos los grupos musculares; te ayuda a realizar ejercicios de peso corporal, a desarrollar la flexibilidad, el equilibrio, la coordinación y a adoptar una postura correcta. ',2500);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('UNICA','Unica es un banco multifunción para el hogar que está realizado con los mismos materiales que un equipo de gimnasio profesional. Con un diseño muy elegante, Unica es el equipo para el entrenamiento físico y el fortalecimiento muscular más completo que existe',5490);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('RUN PERSONAL','La cinta de correr Run Personal combina tecnología de vanguardia y materiales innovadores con el diseño de Antonio Citterio y Toan Nguyen para ofrecerte un entrenamiento cardiovascular profesional y el mejor entretenimiento mientras corres. ',13500);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('CROSS PERSONAL','Cross Personal es el crosstrainer con consola UNITY™ que permite disfrutar de un entretenimiento personalizado. Con el atractivo diseño de Antonio Citterio y su tecnología de vanguardia, que incluye sonido envolvente, Cross Personal transforma el entrenamiento en una experiencia multisensorial',9000);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('Kinesis PERSONAL VISION ','Kinesis Personal es la última novedad en equipos de gimnasio de diseño tanto para el hogar como para los espacios Wellness. Te permite redescubrir y mejorar la fuerza, la coordinación, la flexibilidad, el control de la postura y el control de la respiración',7500);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('MANCUERNAS HEXAGONALES','Las mancuernas hexagonales, disponibles en forma de kits completos o unidades independientes, ofrecen los más altos niveles de calidad y durabilidad. Son fáciles de guardar de forma segura y pueden utilizarse para una amplia variedad de ejercicios. Son especialmente adecuadas para Skillathletic y cross training',100);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('RECLINE PERSONAL','Recline Personal es mucho más que una bicicleta reclinada. Es una verdadera obra maestra que combina la excelente biomecánica de los equipos profesionales del gimnasio con el entretenimiento especializado de la consola UNITY™, y el exclusivo diseño de Antonio Citterio',5490);
+INSERT INTO `productos`(`nombreProducto`,`descripcion`, `precio`) VALUES ('SKILLBIKE','SKILLBIKE es una nueva bicicleta estática de Technogym con un diseño revolucionario. Ha sido creada en colaboración con grandes campeones que utilizan el método SKILLATHLETIC TRAINING, y permite a los profesionales y amantes del ciclismo experimentar la emoción y el reto de montar al aire libre, pero en un ambiente indoor',13500);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Insertar Datos en una Base de datos</title>
+
+  <style type="text/css">
+    .error{
+      background-color: #CC3333;
+    }
+    .correcto{
+      background-color: #00CCCC;
+    }
+    #mensajes{
+      width: 300px;
+      margin: 10px auto;
+    }
+  </style>
+
+</head>
+
+<body background="fondo.jpeg">
+
+  <div id="formulario" align="left">
+    <label>Introduzca un Nombre de usuario <input type="text" name="nomUsuario" id="nom"></label> <input type="button" id="boton" value="Insertar Datos" name="boton">
+  </div>
+
+  <div id="mensajes"></div>
+
+<script src="./jquery-3.5.0.js"></script>
+<script type="text/javascript">
+
+            $(document).ready(function() {
+        
+
+            	$.ajax( {cache: false} );
+            	$('#boton').click(function() {
+
+            		var persona = $.trim($('#nom').val());
+            		var cajaTexto = $('#mensajes');
+
+            		if ( cajaTexto.is(':animated') ) cajaTexto.stop(true);
+
+            		if (persona == '') {
+            			cajaTexto
+            			.removeClass("correcto").addClass("error")
+            			.text("Error!! el campo está vacio. Introduzca un nmbre")
+            			.fadeIn(1000).delay(500).fadeOut(2000);
+            			$("#nom").focus();
+            		}
+            		else {
+            			$.post("insertar.php", { 'nom': persona }, function(datoDevuelto) {
+
+
+            				if ( datoDevuelto == 'ok' ) {
+            					cajaTexto
+            					.removeClass("error").addClass("correcto")
+            					.text("El nombre del usuario ha sido insertado");
+            				}
+            				else {
+                  				cajaTexto
+                  				.hide()
+                  				.addClass('error')
+                  				.text('Error: Problemas con ejecucion MySQL.');
+            				}
+
+            				cajaTexto.fadeIn(1000).delay(500).fadeOut(2000);
+            				$("#nom").val("").focus();
+            			});
+            		}
+            	});
+            });
+          
+</script>
+</body>
+</html>

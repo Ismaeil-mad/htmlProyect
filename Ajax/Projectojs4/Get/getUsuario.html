@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Consultar la informacion de los Usuarios</title>
+
+	<style type="text/css">
+		.enlace_sugerencia_over {
+			background-color: #3366CC;
+		}
+
+		div.zonaconborde {
+			margin-top:5px;
+			margin-left:165px;
+			width:153px;
+			background-color: #FFFFFF; 
+			text-align: left; 
+			border: 1px solid #000000;
+			cursor:pointer;
+		}
+
+		li{
+			list-style: none;
+		}
+
+		body {
+			background-color: #CF9;
+		}
+
+		#pais {
+			font-size: 12px;
+			font-style: italic;
+		}
+	</style>
+
+</head>
+
+<body background="fondo.jpeg">
+	<h1>Listar Usuarios: es un ejemplo de Json</h1>
+	<strong>Introduzca nombre a buscar:</strong>
+	<input type="text" name="nomUsuario" id="nom"/>
+	<input type="button" id="buscar" name="buscar" value="Buscar usuario" />
+	 <input type="button" id="buscarUsuarios" name="buscarUsuarios" value="Listar Usuarios">
+	<div id="zonaresultado"></div>
+
+	<script src="./jquery-3.5.0.js"></script>
+	<script>
+		
+		$(document).ready(function() {
+
+            $("#buscarUsuarios").click(function()
+            {
+                 $.ajax({
+                         async: true,
+                         type: "POST",
+                         dataType: "json",
+                         contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                         url: "peticion.php",
+                         success: mostrarDatos,
+                         timeout: 4000,
+                 });
+                return false;
+            });
+        });
+         function mostrarDatos( aDatos )
+        {
+            var html;
+            html = "<p>los Usuarios que se han encontrado: [" + aDatos.length + "]</p>";
+            html += "<table border='1'>";
+            html +=     "<thead>";
+            html +=         "<tr>";
+            html +=             "<th>Nombre</th>";
+            html +=             "<th>Apellido</th>";
+            html +=         "</tr>";
+            html +=     "</thead>";
+            for( var contador=0; contador < aDatos.length; contador++ )
+            {
+                html += "<tr>";
+                html += "<td>" + aDatos[contador].nombre    + "</td>";
+                html += "<td>" + aDatos[contador].apellido + "</td>";
+                html += "</tr>";
+            }
+            html += "</table>";
+            $("#zonaresultado").html( html );
+        }
+
+
+
+
+		$("#nom").click(function() {
+				$("#nom").val('');
+			});
+		$("#nom").keyup(function() {
+
+				$.get('sugerir.php?' + new Date().getTime(), {nombre: $("#nom").val()}, function(datos) {
+					if (datos != "")
+					$("#zonaresultado").addClass("zonaconborde");
+					else
+					$("#zonaresultado").removeClass("zonaconborde");
+					$("#zonaresultado").html(datos);
+					$("#zonaresultado li").each(function() { 
+						$(this).mouseover(function() {
+							$(this).addClass("enlace_sugerencia_over");
+						});
+						$(this).mouseout(function() { 
+							$(this).removeClass("enlace_sugerencia_over");
+						});
+						$(this).click(function() { 	$("#nom").val($(this).text());
+							console.log("Mensaje consola: " + $("#nom").val());
+							$("#zonaresultado").html("");
+							$("#zonaresultado").removeClass("zonaconborde");
+						});
+					});
+				}, "text");
+			});
+			$("#buscar").click(function() {
+				if ($("#nom").val() != "") { 
+					$.get("obtenerinfo.php?" + new Date().getTime(), {nombre: $("#nom").val()}, function(resultados) {
+							console.log(resultados);
+						if (resultados == 'error')
+							$("#zonaresultado").html("No se ha encontrado información del Usuario.")
+						else
+						{	cadena = '';
+							for (clave in resultados)
+							{
+								cadena += clave + ": " + resultados[clave] + "<br/>";
+
+							}
+							$("#zonaresultado").html(cadena);
+
+						}
+
+					});
+
+				}
+			});
+		
+</script>
+
+</body>
+</html>

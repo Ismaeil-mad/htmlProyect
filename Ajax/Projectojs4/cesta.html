@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        #cen{
+            float: left;
+            height: 300px;
+            width: 900px;
+        }
+        #der{
+            float: right;
+            height: 300px;
+            width: 900px;
+        }
+
+    </style>
+    <title></title>
+
+</head>
+<body>
+
+             <button onclick= "mostrarProductos()">Mostrar Productos</button>
+
+
+
+             <div id="cen">
+</div>
+<div id="der">
+</div>
+
+</body>
+<script type="text/javascript">
+
+
+
+   
+
+
+    function AñadirAlaCesta1(obj){
+
+      document.getElementById("der").innerHTML = "SKILLBIKE!! Añadido";
+
+    }
+
+    function AñadirAlaCesta2(obj){
+
+      document.getElementById("der").innerHTML = "CROSS PERSONAL!! Añadido";
+
+    }
+    function AñadirAlaCesta3(obj){
+
+      document.getElementById("der").innerHTML = "RECLINE PERSONAL!! Añadido";
+
+    }
+    function AñadirAlaCesta4(obj){
+
+      document.getElementById("der").innerHTML = "Kinesis PERSONAL VISION!! Añadido";
+
+    }
+
+    function quitarproducto(){
+       var list = document.getElementById("der");
+  if (list.hasChildNodes()) {
+    list.removeChild(list.childNodes[0]);
+  }
+
+    }
+
+
+    function duplicarProducto(){
+        var c = document.getElementById("der");
+        var clon = c.cloneNode(true);
+        document.getElementById("der").appendChild(clon);
+    }
+
+
+    function vaciar(){
+        document.getElementById("der").innerHTML = "";
+        
+    }
+
+
+    function mOut1(obj) {
+  document.getElementById("der").innerHTML = "MYRUN TECHNOGYM: es mucho más que una cinta de correr. Es la primera solución para correr que integra perfectamente una cinta de correr y una aplicación nativa que se sincroniza con tu tablet. Está diseñada para ofrecerte la mejor experiencia, con programas de entrenamiento personalizados y feedback instantáneo de la carrera. Así mejorarás tu carrera. Siempre."
+
+}
+
+function mOut2(obj) {
+  document.getElementById("der").innerHTML = "SKILLBIKE es una nueva bicicleta estática de Technogym con un diseño revolucionario. Ha sido creada en colaboración con grandes campeones que utilizan el método SKILLATHLETIC TRAINING, y permite a los profesionales y amantes del ciclismo experimentar la emoción y el reto de montar al aire libre, pero en un ambiente indoor."
+
+}
+
+function mOut3(obj) {
+  document.getElementById("der").innerHTML = "Cross Personal es el crosstrainer con consola UNITY™ que permite disfrutar de un entretenimiento personalizado. Con el atractivo diseño de Antonio Citterio y su tecnología de vanguardia, que incluye sonido envolvente, Cross Personal transforma el entrenamiento en una experiencia multisensorial."
+
+}
+
+function mOut4(obj) {
+  document.getElementById("der").innerHTML = "Recline Personal es mucho más que una bicicleta reclinada. Es una verdadera obra maestra que combina la excelente biomecánica de los equipos profesionales del gimnasio con el entretenimiento especializado de la consola UNITY™, y el exclusivo diseño de Antonio Citterio."
+
+}
+
+function setCookie(cname, cvalue, exdays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires="+d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+    
+
+function mostrarProductos(){
+ var usuario = getCookie("use");
+  var firstName = getCookie("firstName");
+  
+        if(firstName != null) {
+            alert("Bienvenido de nuevo, " + firstName);
+        } else {
+            firstName = prompt("Por favor Introduzca su nombre");
+            if(firstName != "" && firstName != null) {
+                setCookie("firstName", firstName, 1);
+            }
+        }
+
+     if (usuario==""){
+      usuario= prompt("introduzca su edad");
+       setCookie("use", usuario, 365);
+     }
+  
+  else if (usuario <18) {
+    alert("No se puede mostrar este contenido para menores de 18")
+  } else if (usuario>=18){
+     document.getElementById("cen").innerHTML="<table cellpadding=4 cellspacing=4 border=1><tr><td valign=top><table cellpadding=4 cellspacing=4 border=0><thead><tr><td colspan=2><h1>Productos</h1></td></tr></thead><tbody><tr><td>SKILLBIKE</td><td><input type=button value=Añadir onclick=AñadirAlaCesta1() /><input type=button value=Descripcion onclick=mOut1()><input type=button value=Quitar producto onclick=quitarproducto()><input type=button id=dup value=Duplicar onclick=duplicarProducto()></td></tr><tr><td>CROSS PERSONAL</td><td><input type=button value=Añadir onclick=AñadirAlaCesta2() /><input type=button value=Descripcion onclick=mOut2()><input type=button value=Quitar producto onclick=quitarproducto()><input type=button id=dup value=Duplicar onclick=duplicarProducto()></td></td></tr><tr><td>RECLINE PERSONAL</td><td><input type=button value=Añadir onclick=AñadirAlaCesta3() /><input type=button value=Descripcion onclick=mOut3()><input type=button value=Quitar producto onclick=quitarproducto()><input type=button value=Duplicar onclick=duplicarProducto()></td></tr><tr><td>Kinesis PERSONAL VISION</td><td><input type=button value=Añadir onclick=AñadirAlaCesta4() /><input type=button value=Descripcion onclick=mOut4()><input type= button value=Quitar producto onclick=quitarproducto()><input type=button  value=Duplicar onclick=duplicarProducto()></td></tr></tbody></table><input type=reset name=limpiar id=button onclick=vaciar() value=Limpiar></td></table>";
+ }
+  
+  }
+function eliminarCookies(){
+    setCookie("use","",0);
+    document.getElementById("cen").innerHTML="";
+
+}
+
+
+</script>
+</html>
+ 
+   
+
+
+

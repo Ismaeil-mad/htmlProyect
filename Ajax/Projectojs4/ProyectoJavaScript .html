@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<lang es>
+<html>
+	<head>
+		<title> Proyecto Script de Gimnasio</title>
+		<link rel="stylesheet" type="text/css" href="fcm.css">
+		
+	</head>
+	<body background="fondo.jpeg" onload="checkCookie()">
+	<script type="text/javascript" src="imc.js"></script>
+	<script type="text/javascript" src="FCM.js"></script>
+		<script type="text/javascript" src="calorias.js"></script>
+		<script type="text/javascript" src="horario.js"></script>
+		<script type="text/javascript" src="formulario.js"></script>
+		<script type="text/javascript" src="productos.js"></script>
+	<h1>Proyecto Script Deportivo</h1>
+	<br>
+	<div id="cabecera">
+	<br>
+	<br>
+		<div id="header">
+			<nav> 
+				<ul class="nav">
+					<li><a href="">Home</a></li>
+					<li><a href="Post/postUsuario.html">Anadir Usuarios</a></li>
+					<li><a href="Get/getUsuario.html">Consultar Usuarios</a></li>
+					<li><a href="Get/getProductos.html">Consultar Productos</a></li>
+					<li><a href="Get/json.html">Mostrar Datos Json</a></li>
+					<li><a href="">Utilidades</a></li>
+				</ul>
+				<ul>
+					<li><a href="cesta.html"><img src="cesta-compra.png" width="35px" height="35px"></a></li>
+				</ul>
+			</nav>
+			
+		</div>
+		</div>
+		<br>
+		<div id="cmpleto">
+		
+		<div id="colIz">
+		<br><br>
+		<button onclick = "imc()">Calculadora de IMC</button>
+		<br></br>
+		<button onclick = "frecuencia()">Calculadora de FMC</button>
+		<br></br>
+		<button onclick = "calculadora()">Caculadora de calorias</button>
+		<br></br>
+		<button onclick= "createTable()">Horario</button>
+		<br></br>
+		
+		</div>
+		<div id="colcen">
+			
+			 <button onclick="eliminarCookies()">Limpiar cookies</button>
+
+		</div>
+		<div id ="colbody">
+		Nombre: <input id="nom" style="margin:10px" type="text"><br>
+        Apellido: <input id="ape" style="margin:4px" type="text"><br>
+        Edad: <input id="eda" style="margin:20px" type="text"><br>
+        Direccion: <input id="dir" style="margin:20px" type="text"><br>
+        Email:<input id="ema" style="margin:20px" type="text">
+        <select id="dropDown" onchange="output(this)">
+		<option>VIP:</option>
+		<option value="1">Si</option>
+		<option value="2">No</option>
+		</select>
+        <button id="btn_guardar" onclick="guardar()">Añadir</button>
+        <button id="btn_guardar" onclick="validar()">validar</button><br>
+
+        <table >
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Direccion</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="tablita">
+
+            </tbody>
+        </table>
+
+		</div>
+	</body>
+</html>

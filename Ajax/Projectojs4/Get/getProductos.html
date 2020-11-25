@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8"/>
+	<title>Obtener Productos del Gym</title>
+
+	<style type="text/css">
+		.enlace_sugerencia_over {
+			
+		}
+
+		div.zonaconborde {
+			margin-top:5px;
+			margin-left:165px;
+			width:153px;
+			background-color: #FFFFFF; 
+			text-align: left; 
+			border: 1px solid #000000;
+			cursor:pointer;
+		}
+
+		li{
+			list-style: none;
+		}
+
+		body {
+			background-color: #CF9;
+		}
+
+		#pais {
+			font-size: 12px;
+			font-style: italic;
+		}
+	</style>
+
+</head>
+
+<body background="fondo.jpeg">
+	<strong>Introduzca nombre de un producto a buscar:</strong>
+	<input type="text" name="nomProducto" id="nome"/>
+	<input type="button" id="buscar" name="buscar" value="Obtener Información" />
+	<div id="zonaresultado"></div>
+
+
+	<script src="./jquery-3.5.0.js"></script>
+	<script>
+		$(document).ready(function() {
+		$("#nome").click(function() {
+				$("#nome").val('');
+			});
+		$("#nome").keyup(function() {
+
+				$.get('sugerirDatos.php?' + new Date().getTime(), {nombreProducto: $("#nome").val()}, function(datos) {
+					if (datos != "")
+					 	$("#zonaresultado").addClass("zonaconborde");
+					else 
+						$("#zonaresultado").removeClass("zonaconborde");
+					$("#zonaresultado").html(datos);
+					$("#zonaresultado li").each(function() { 
+						$(this).mouseover(function() {
+							$(this).addClass("enlace_sugerencia_over");
+						});
+						$(this).mouseout(function() { 
+							$(this).removeClass("enlace_sugerencia_over");
+						});
+						$(this).click(function() { 	$("#nome").val($(this).text());
+							console.log("Mensaje consola: " + $("#nome").val());
+							$("#zonaresultado").html("");
+							$("#zonaresultado").removeClass("zonaconborde");
+						});
+					});
+				}, "text");
+			});
+			$("#buscar").click(function() {
+				if ($("#nome").val() != "") { 
+					$.get("obtenerDatos.php?" + new Date().getTime(), {nombreProducto: $("#nome").val()}, function(resultados) {
+							console.log(resultados);
+						if (resultados == 'error')
+							$("#zonaresultado").html("No se ha encontrado información del Producto.")
+						else
+						{	cadena = '';
+							for (clave in resultados)
+							{
+								cadena += clave + ": " + resultados[clave] + "<br/>";
+
+							}
+							$("#zonaresultado").html(cadena);
+
+						}
+
+					});
+
+				}
+			});
+		});
+</script>
+
+</body>
+</html>

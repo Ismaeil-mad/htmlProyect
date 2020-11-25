@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> JSON && AJAX</title>
+</head>
+
+<body background="fondo.jpeg">
+<h1>Mostrar Datos desde PHP a través del Json</h1>
+
+<input type="text" id="nombreProducto" placeholder="nombreProducto" accept="text/plain"><br><br>
+<input type="text" id="descripcion" placeholder="descripcion" accept="text/plain"><br><br>
+<input type="number" id="precio" placeholder="precio" accept="text/plain">
+
+<div class="enviar"><h3>Click mi para ver los datos insertadas</h3></div>
+<hr>
+<div class="respuesta"></div>
+
+<script src="./jquery-3.5.0.js"></script>
+<script>
+$(".enviar").click(function(e) {
+	e.preventDefault();
+	var nombreProducto = $("#nombreProducto").val(),
+	descripcion = $("#descripcion").val(),
+	precio = $("#precio").val(),
+	datos = {"nombreProducto":nombreProducto, "descripcion":descripcion,"precio":precio};
+
+	$.ajax({
+		url: "datosProductos.php",
+		type: "POST",
+		dataType: "json",
+		data: datos
+	}).done(function(respuesta){
+		if (respuesta.estado === "ok") {
+			console.log(JSON.stringify(respuesta));
+
+			var nombreProducto = respuesta.nombreProducto,
+			descripcion = respuesta.apellido,
+			precio = respuesta.precio;
+
+			$(".respuesta").html("Servidor:<br><pre>"+JSON.stringify(respuesta, null, 2)+"</pre>");
+		}
+	});
+});
+</script>
+</body>
+</html>
